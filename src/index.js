@@ -21,7 +21,8 @@ const stories = [
 ];
 
 ReactDOM.render(
-  <App stories={stories} />,
+  // An archiving function can be passed down to the Story component from your src/index.js file. In the beginning, it can be an empty function. The function will be replaced later when you will dispatch a Redux action.
+  <App stories={stories} onArchive={() => {}} />,
   document.getElementById('root')
 );
 // ReactDOM.render(<App />, document.getElementById('root'));
