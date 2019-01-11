@@ -1,5 +1,6 @@
 import React from 'react';
 import './Story.css';
+import ButtonInline from './Button';
 
 // Third, the Story component, in the src/components/Story.js file, renders a few properties of the passed story object. The story object gets already destructured from the props in the function signature. Furthermore, the story object gets destructured as well.
 
