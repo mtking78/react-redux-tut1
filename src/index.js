@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import store from './store';
+import getReadableStories from './selectors/story';
 import STORY_ARCHIVE from './constants/actionTypes';
 // import * as serviceWorker from './serviceWorker';
 
@@ -31,7 +32,9 @@ ReactDOM.render(
 
   //  Since the state is sliced up into two substates now, you have to adjust how you retrieve the stories from your store in the src/index.js file with the intermediate storyState now. This is a crucial step, because it shows how combined reducers slice up the state into substates.
   <App
-    stories={store.getState().storyState}
+    // stories={store.getState().storyState}
+    // Use the selector to compute the not-archived stories instead of retrieving the whole list of stories from the store.
+    stories={getReadableStories(store.getState())}
     // Dispatch the action in your React entry point where you had the empty function before. Now the passed onArchive() function will dispatch an action when it is used.
     onArchive={id => store.dispatch({ type: STORY_ARCHIVE, id })}
   />,
