@@ -4,6 +4,7 @@ import './index.css';
 import App from './components/App';
 import store from './store';
 import getReadableStories from './selectors/story';
+import doArchiveStory from './actions/archive';
 import STORY_ARCHIVE from './constants/actionTypes';
 // import * as serviceWorker from './serviceWorker';
 
@@ -37,7 +38,9 @@ function render() {
       // Use the selector to compute the not-archived stories instead of retrieving the whole list of stories from the store.
       stories={getReadableStories(store.getState())}
       // Dispatch the action in your React entry point where you had the empty function before. Now the passed onArchive() function will dispatch an action when it is used.
-      onArchive={id => store.dispatch({ type: STORY_ARCHIVE, id })}
+      // onArchive={id => store.dispatch({ type: STORY_ARCHIVE, id })}
+      // Instead of dispatching the action object directly, you can create an action by using its action creator. The action creator function only returns the action object instead of defining the action object inline.
+      onArchive={id => store.dispatch(doArchiveStory(id))}
     />,
     document.getElementById('root')
   );
