@@ -1,4 +1,4 @@
-import STORY_ARCHIVE from '../constants/actionTypes';
+import { STORY_ARCHIVE } from '../constants/actionTypes';
 
 // The initial state is an empty list, because no story is archived in the beginning.
 const INITIAL_STATE = [];
