@@ -9,13 +9,19 @@ const isNotArchived = archivedIds => story =>
 // }
 
 // Create your first selector in a new src/selectors/story.js file that only returns the part of the stories that is not archived. The archiveState is the list of archived ids.
+// The story state isn’t anymore a mere list of stories but a complex object with a list of stories and an error object.
 const getReadableStories = ({ storyState, archiveState }) =>
-  storyState.filter(isNotArchived(archiveState));
+  storyState.stories.filter(isNotArchived(archiveState));
 // es5 syntax:
 // function getReadableStories(state) {
 //   return state.storyState.filter(isNotArchived(state.archiveState));
 // }
 
+// A second selector in the src/selectors/story.js file to select the error object.
+const getFetchError = ({ storyState }) =>
+  storyState.error;
+
 export {
   getReadableStories,
+  getFetchError,
 };
