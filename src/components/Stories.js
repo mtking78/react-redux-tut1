@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { doArchiveStory } from '../actions/archive';
+// import { doArchiveStory } from '../actions/archive';
 import { getReadableStories } from '../selectors/story';
-import './Stories.css';
 import Story from './Story';
+import './Stories.css';
 
 // Define an object to describe the columns in the src/components/Stories.js file:
 const COLUMNS = {
@@ -29,7 +29,7 @@ const COLUMNS = {
 };
 
 // The Stories component in the src/components/Stories.js file, receives the stories as props and renders for each story a Story component. You may want to default to an empty array that the Stories component doesn’t crash when the list of stories is null.
-const Stories = ({ stories, onArchive }) =>
+const Stories = ({ stories }) =>
   <div className="stories">
     {/* Use the COLUMNS object to give the Stories component matching header columns as well. That’s why the COLUMNS object got defined in the Stories component in the first place. Now, rather than doing it manually, as in the Story component, map over the object dynamically to render the header columns. Since it is an object, you have to turn it into an array of the property names, and then access the object by its keys to retrieve its properties (width, label). */}
     {/* Extract the header columns as its own StoriesHeader component to keep your components well arranged and separated by concerns. */}
@@ -40,8 +40,6 @@ const Stories = ({ stories, onArchive }) =>
           story={story}
           // Pass this object to your Story component in the src/components/Stories.js file. Still the Stories component has access to the object to use it later on for its own column headings.
           columns={COLUMNS}
-          // The archiving function passes the Stories component:
-          onArchive={onArchive}
         />
       )}
   </div>
@@ -63,12 +61,6 @@ const mapStateToProps = state => ({
   stories: getReadableStories(state),
 });
 
-// mapDispatchToProps(dispatch, [props]): It is a function (or object) that can be passed to the connect HOC. Whereas mapStateToProps() gives access to the global state, mapDispatchToProps() gives access to the dispatch method of the Redux store. It makes it possible to dispatch actions but passes down only plain functions that wire up the dispatching in a higher-order function. After all, it makes it possible to pass functions down to the input component of the connect HOC to alter the state. Optionally, here you can also use the incoming props to wrap those into the dispatched action.
-const mapDispatchToProps = dispatch => ({
-  onArchive: id => dispatch(doArchiveStory(id)),
-});
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Stories);
